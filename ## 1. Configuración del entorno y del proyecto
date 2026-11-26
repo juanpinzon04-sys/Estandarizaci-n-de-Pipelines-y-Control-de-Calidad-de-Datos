@@ -1,0 +1,28 @@
+
+from pathlib import Path
+import os
+import sys
+
+# Opción A: utilizar la carpeta actual del notebook.
+PROJECT_DIR = Path.cwd().resolve()
+
+# Opción B: si necesitas otra ubicación, descomenta y modifica esta línea:
+# PROJECT_DIR = Path(r"C:\\Users\\TU_USUARIO\\Documents\\PROYECTO_MLOPS_IRIS")
+
+# Carpetas del proyecto
+DATA_DIR = PROJECT_DIR / "data" / "processed"
+MODELS_DIR = PROJECT_DIR / "models"
+SRC_DIR = PROJECT_DIR / "src"
+TESTS_DIR = PROJECT_DIR / "tests"
+CONTRACTS_DIR = PROJECT_DIR / "contracts"
+
+for carpeta in [DATA_DIR, MODELS_DIR, SRC_DIR, TESTS_DIR, CONTRACTS_DIR]:
+    carpeta.mkdir(parents=True, exist_ok=True)
+
+# Fijar el directorio de trabajo para que las rutas relativas sean consistentes.
+os.chdir(PROJECT_DIR)
+
+print("Directorio raíz del proyecto:", PROJECT_DIR)
+print("\nCarpetas verificadas:")
+for carpeta in [DATA_DIR, MODELS_DIR, SRC_DIR, TESTS_DIR, CONTRACTS_DIR]:
+    print("-", carpeta.relative_to(PROJECT_DIR))
